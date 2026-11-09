@@ -1,0 +1,15 @@
+
+.student-list {
+    margin-top: 30px;
+}
+
+.student-list h2 {
+    color: #1e293b;
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+.student-list > p {
+    color: #64748b;
+    font-size: 15px;
+}
