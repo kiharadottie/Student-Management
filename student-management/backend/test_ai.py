@@ -1,21 +1,31 @@
+
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
 
-client = OpenAI (
-    base_url="meta/llama-3.1-8b-instruct",
-    api_key=os.getenv("NVIDIA_API_KEY"),
-)
+api_key = os.getenv("NVIDIA_API_KEY")
+model = os.getenv("NVIDIA_MODEL")
 
+print("API key loaded:", bool(api_key))
+print("Model being used:", model)
+
+client = OpenAI(
+    base_url="https://integrate.api.nvidia.com/v1",
+    api_key=api_key
+)
 
 response = client.chat.completions.create(
-    model=os.getenv("NVIDIA_MODEL"),
+    model=model,
     messages=[
-        {"role": "user", "content": "Explain Python"}
+        {
+            "role": "user",
+            "content": "Explain what Python is in simple words."
+        }
     ],
-    max_tokens=200
+    max_tokens=1024
 )
 
-print(response.choices[0].message.content)
+print("\nFULL NVIDIA RESPONSE:")
+print(response.model_dump_json(indent=2))
